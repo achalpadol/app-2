@@ -32,10 +32,10 @@ pipeline {
         EKS_CLUSTER = 'achal-cluster-1'
 
         // Kubernetes namespaces
-        DEV_NS  = 'app-dev'
-        QA_NS   = 'app-qa'
-        UAT_NS  = 'app-uat'
-        PROD_NS = 'app-prod'
+        DEV_NS  = 'app2-dev'
+        QA_NS   = 'app2-qa'
+        UAT_NS  = 'app2-uat'
+        PROD_NS = 'app2-prod'
     }
 
     parameters {
