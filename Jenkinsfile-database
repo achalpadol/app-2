@@ -126,13 +126,6 @@ pipeline {
         }
        stage('Deploy Database - DEV') {
 
-            when {
-
-                expression {
-                    env.DEPLOY_ENV == 'dev'
-                }
-            }
-
             steps {
 
                 script {
