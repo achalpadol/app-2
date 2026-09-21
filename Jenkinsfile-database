@@ -237,7 +237,6 @@ def deployDatabase(namespace, imageName, imageTag) {
 
         kubectl apply \
            -f kube/db-secret.yml \
-           -f kube/configmap.yml \
            -f kube/db-service.yaml \
            -f kube/db-deploy.yml \
            -n ${namespace}
