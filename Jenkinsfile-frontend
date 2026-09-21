@@ -116,65 +116,87 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Frontend') {
-            steps {
-                script {
-                    def namespace
-                    def imageName
-                    def imageTag
-
-                    switch (params.Environment) {
-                        case 'dev':
-                            namespace = env.DEV_NS
-                            imageName = env.FRONTEND_IMAGE_DEV
-                            imageTag = env.BUILD_NUMBER
-                            break
-                        case 'qa':
-
-                            namespace = env.QA_NS
-                            imageName = env.FRONTEND_IMAGE_QA
-                            imageTag = params.IMAGE_TAG.trim()
-
-                            break
-                        case 'uat':
-
-                            namespace = env.UAT_NS
-                            imageName = env.FRONTEND_IMAGE_UAT
-                            imageTag = params.IMAGE_TAG.trim()
-
-                            break
-
-
-                        case 'prod':
-
-                            namespace = env.PROD_NS
-                            imageName = env.FRONTEND_IMAGE_PROD
-                            imageTag = params.IMAGE_TAG.trim()
-
-                            break
-                    }
-
-
-                    // Manual approval for PROD
-                    if (params.Environment == 'prod') {
-
-                        input(
-                            message: "Deploy frontend ${imageName}:${imageTag} to PROD?",
-                            ok: 'Deploy to Production'
-                        )
-                    }
-
-
-                    // Call reusable function
-                    deployFrontend(
-                        namespace,
-                        imageName,
-                        imageTag
-                    )
-                }
-            }
+       stage('Deploy Frontend - DEV') {
+    when {
+        expression {
+            params.Environment == 'dev'
         }
     }
+    steps {
+        script {
+            deployFrontend(
+                env.DEV_NS,
+                env.FRONTEND_IMAGE,
+                env.BUILD_NUMBER
+            )
+        }
+    }
+}
+
+stage('Deploy Frontend - QA') {
+    when {
+        expression {
+            params.Environment == 'qa'
+        }
+    }
+    steps {
+        script {
+            deployFrontend(
+                env.QA_NS,
+                env.FRONTEND_IMAGE,
+                params.IMAGE_TAG.trim()
+            )
+        }
+    }
+}
+
+stage('Deploy Frontend - UAT') {
+    when {
+        expression {
+            params.Environment == 'uat'
+        }
+    }
+    steps {
+        script {
+            deployFrontend(
+                env.UAT_NS,
+                env.FRONTEND_IMAGE,
+                params.IMAGE_TAG.trim()
+            )
+        }
+    }
+}
+
+stage('Production Approval') {
+    when {
+        expression {
+            params.Environment == 'prod'
+        }
+    }
+    steps {
+        input(
+            message: "Deploy frontend ${env.FRONTEND_IMAGE}:${params.IMAGE_TAG} to PROD?",
+            ok: 'Deploy to Production'
+        )
+    }
+}
+
+stage('Deploy Frontend - PROD') {
+    when {
+        expression {
+            params.Environment == 'prod'
+        }
+    }
+    steps {
+        script {
+            deployFrontend(
+                env.PROD_NS,
+                env.FRONTEND_IMAGE,
+                params.IMAGE_TAG.trim()
+            )
+        }
+    }
+}
 
 
     post {
@@ -223,7 +245,7 @@ def deployFrontend(namespace, imageName, imageTag) {
 
         kubectl apply \
             -f kube/frontend-service.yaml \
-            -f kube/frontend-deployment.yml \
+            -f kube/frontend-deployment.yaml \
             -f kube/ingress.yml \
             -n ${namespace}
 
