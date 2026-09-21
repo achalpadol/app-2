@@ -268,3 +268,4 @@ def deployFrontend(namespace, imageName, imageTag) {
         echo "Frontend deployment completed."
     """
 }
+give this file in the proper syntax 
