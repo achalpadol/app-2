@@ -5,6 +5,9 @@ metadata:
 
 spec:
   ingressClassName: nginx
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
   rules:
     - host: app.local
       http:
