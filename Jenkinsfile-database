@@ -321,7 +321,7 @@ def deployDatabase(namespace, imageName, imageTag) {
         echo "Creating namespace if required..."
         echo "=========================================="
 
-        kubectl create namespace ${namespace} \
+        kubectl create namespace ${env.DEV_NAMESPACE} \
             --dry-run=client \
             -o yaml | kubectl apply -f -
 
@@ -333,7 +333,7 @@ def deployDatabase(namespace, imageName, imageTag) {
            -f kube/db-secret.yml \
            -f kube/db-service.yaml \
            -f kube/db-deploy.yml \
-           -n ${namespace}
+           -n ${env.DEV_NAMESPACE}
 
         echo "=========================================="
         echo "Updating database Docker image..."
@@ -342,7 +342,7 @@ def deployDatabase(namespace, imageName, imageTag) {
         kubectl set image \
             deployment/app1-db \
             db=${imageName}:${imageTag} \
-            -n ${DEV_NAMESPACE}
+            -n ${env.DEV_NAMESPACE}
 
         echo "=========================================="
         echo "Waiting for database rollout..."
@@ -350,12 +350,12 @@ def deployDatabase(namespace, imageName, imageTag) {
 
         kubectl rollout status \
             deployment/app1-db \
-            -n ${namespace}
+            -n ${env.DEV_NAMESPACE}
 
         echo "=========================================="
         echo "Database deployment completed."
         echo "Image: ${imageName}:${imageTag}"
-        echo "Namespace: ${namespace}"
+        echo "Namespace: ${env.DEV_NAMESPACE}"
         echo "=========================================="
     """
 }
