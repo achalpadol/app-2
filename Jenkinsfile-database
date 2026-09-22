@@ -342,7 +342,7 @@ def deployDatabase(namespace, imageName, imageTag) {
         kubectl set image \
             deployment/app1-db \
             db=${imageName}:${imageTag} \
-            -n ${namespace}
+            -n ${DEV_NAMESPACE}
 
         echo "=========================================="
         echo "Waiting for database rollout..."
