@@ -348,7 +348,7 @@ def deployDatabase(namespace, imageName, imageTag) {
         echo "Waiting for database rollout..."
         echo "=========================================="
 
-        kubectl rollout status deployment/db -n ${namespace} --timeout=300s
+        kubectl rollout status deployment/db -n ${namespace} 
 
         echo "=========================================="
         echo "Database deployment completed."
