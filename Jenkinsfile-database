@@ -2,7 +2,6 @@ def databaseImage
 
 pipeline {
 
-```
 agent any
 
 environment {
@@ -362,7 +361,7 @@ post {
    echo "Image: ${imageName}:${imageTag}"
    echo "Namespace: ${namespace}"
    echo "=========================================="
-  ```
+  
 
   """
   }
