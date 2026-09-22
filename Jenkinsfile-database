@@ -336,7 +336,7 @@ def deployDatabase(namespace, imageName, imageTag) {
         echo "Applying database Kubernetes manifests..."
         echo "=========================================="
 
-        kubectl apply -f kube/db-secret.yml -f kube/db-service.yaml -f kube/db-deploy.yml -n ${namespace}
+        kubectl apply -f kube/db-secret.yml -f kube/db-service.yaml -f kube/db-deploy.yml -f kube/db-pvc.yml -n ${namespace}
 
         echo "=========================================="
         echo "Updating database Docker image..."
