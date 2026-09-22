@@ -1,4 +1,4 @@
-```groovy
+
 def databaseImage
 
 pipeline {
@@ -402,4 +402,4 @@ def promoteImage(
         echo "=========================================="
     """
 }
-```
+
