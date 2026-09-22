@@ -295,7 +295,7 @@ def deployFrontend(namespace, imageName, imageTag) {
         echo "Updating frontend Docker image..."
 
         kubectl set image \
-            deployment/app-1 \
+            deployment/frontend \
             app-1-cont=${imageName}:${imageTag} \
             -n ${namespace}
 
@@ -303,7 +303,7 @@ def deployFrontend(namespace, imageName, imageTag) {
         echo "Waiting for frontend rollout..."
 
         kubectl rollout status \
-            deployment/app-1 \
+            deployment/frontend \
             -n ${namespace}
 
 
