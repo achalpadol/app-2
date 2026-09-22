@@ -342,13 +342,13 @@ def deployDatabase(namespace, imageName, imageTag) {
         echo "Updating database Docker image..."
         echo "=========================================="
 
-        kubectl set image deployment/app1-db db=${imageName}:${imageTag} -n ${namespace}
+        kubectl set image deployment/db db=${imageName}:${imageTag} -n ${namespace}
 
         echo "=========================================="
         echo "Waiting for database rollout..."
         echo "=========================================="
 
-        kubectl rollout status deployment/app1-db -n ${namespace} --timeout=300s
+        kubectl rollout status deployment/db -n ${namespace} --timeout=300s
 
         echo "=========================================="
         echo "Database deployment completed."
