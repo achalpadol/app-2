@@ -11,13 +11,13 @@ pipeline {
         BACKEND_DOCKERFILE = './proxy/Dockerfile'
 
         // Same Docker image repository for all environments
-        FRONTEND_IMAGE_DEV  = 'achalpadol/app-1-proxy'
-        FRONTEND_IMAGE_QA   = 'achalpadol/app-1-proxy'
-        FRONTEND_IMAGE_UAT  = 'achalpadol/app-1-proxy'
-        FRONTEND_IMAGE_PROD = 'achalpadol/app-1-proxy'
+        FRONTEND_IMAGE_DEV  = 'achalpadol/app-2-proxy'
+        FRONTEND_IMAGE_QA   = 'achalpadol/app-2-proxy'
+        FRONTEND_IMAGE_UAT  = 'achalpadol/app-2-proxy'
+        FRONTEND_IMAGE_PROD = 'achalpadol/app-2-proxy'
 
         // Common frontend image
-        FRONTEND_IMAGE = 'achalpadol/app-1-proxy'
+        FRONTEND_IMAGE = 'achalpadol/app-2-proxy'
 
         // Docker Hub
         REGISTRY_URL = 'https://index.docker.io/v1/'
