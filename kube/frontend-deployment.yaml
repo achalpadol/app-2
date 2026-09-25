@@ -24,9 +24,4 @@ spec:
           ports:
             - containerPort: 80
 
-          env:
-            - name: FRONTEND_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: frontend-secret
-                  key: frontend-secret
+          
