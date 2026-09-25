@@ -3,9 +3,9 @@ kind: Ingress
 metadata:
   name: app-ingress
 spec:
-  ingressClassName: nginx
+  ingressClassName: alb
   rules:
-    - host: app.local
+    - host: app2.achal.com
       http:
         paths:
           - path: /
