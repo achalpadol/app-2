@@ -289,7 +289,7 @@ def deployFrontendToEKS(
 
         kubectl apply \
             -f kube/frontend-service.yaml \
-            -f kube/frontend-deployment.yml \
+            -f kube/frontend-deployment.yaml \
             -f kube/ingress.yml \
             -n ${namespace}
 
